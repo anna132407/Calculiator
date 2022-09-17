@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Comput {
     private StringBuffer expression;
     private MyStack<Character> op=new MyStack();
@@ -20,29 +23,6 @@ public class Comput {
         {
             Operation top=(Operation)op.peek();
             int com=p.getPro()-top.getPro();
-            // Если уровень оператора, который будет входящим, высокий, входящий напрямую
-//			if(com>0)
-//			{
-            // // Станция прямого давления
-//				op.push(p);
-//			}
-            // // Если уровень оператора, который должен быть помещен в стек, является низким, оператор будет вытолкнут из стека (два числа должны быть выброшены одновременно)
-//			else
-//			{
-            // // всплываем два числа
-            // // Объявляем два числа в верхней части стека операндов
-//				int a=(Integer)oprands.pop();
-//				int b=(Integer)oprands.pop();
-            // // Объявляем оператор в верхней части стека операторов
-//				Oparation t=(Oparation) op.pop();
-            // // Вычисляем два числа в стеке
-//				int result=t.computting(b,a);
-            // // Переносим результат в стек
-//				oprands.push(result);
-            // // стек оператора
-//				op_Push(p);
-//			}
-
             if(com>0)
             {
                 op.push(p);
@@ -89,12 +69,21 @@ public class Comput {
         this.expression = sb;
     }
 
+    public static boolean isRight(String expression){
+        if (!expression.matches("[\\d()*/+-]+")) return false;
+        Pattern pat = Pattern.compile("[*/+-][*/+-]+");
+        Matcher m = pat.matcher(expression);
+        if (m.find()) return false;
+        return false;
+    }
+
     public double compute()
     {
         int index=0;
         int length=expression.length();
         char ch='\0';
         String num ="";
+
         while (index <length)
         {
             ch = expression.charAt (index);

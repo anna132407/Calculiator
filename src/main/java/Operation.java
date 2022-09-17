@@ -45,7 +45,7 @@ public class Operation {
                 return (a)/(b);
             }
             default: {
-                System.out.println("Неверное количество скобок!");
+                System.out.println("Неверно введено выражение!");
             }
             }
                 System.exit(-1);

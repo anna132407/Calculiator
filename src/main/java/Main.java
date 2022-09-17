@@ -41,6 +41,10 @@ public class Main {
             {
                 sb.replace(index, index+1, ")");
             }
+            if (sb.charAt (index) == ' ')
+            {
+                sb.replace(index, index+1, "");
+            }
             index++;
         }
         Comput com=new Comput(sb);
